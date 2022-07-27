@@ -1,0 +1,76 @@
+<!-- <div class="container">
+  <mat-list>
+    <app-list-items *ngFor="let leave of leaves" [leave]="leave"></app-list-items>
+  </mat-list>
+</div> -->
+
+<div class="container">
+  <div class="col-flex">
+      <div *ngIf="isUser()" class="row-flex-header">
+          <div class="no">N0.</div>
+          <div class="type-date-cot">Type</div>
+          <div class="results">Results</div>
+      </div>
+      <span></span>
+      <ng-container *ngIf="isUser()">
+        <app-list-items  *ngFor="let leave of leaves" [leave]="leave"></app-list-items>
+      </ng-container>
+      <ng-container *ngIf="!isUser()">
+      <app-list-items *ngFor="let leave of leavesForManger" [leave]="leave" (handleApproveOutput)="handleApprove($event)" (handleRejectOutput)="handleReject($event)"></app-list-items>
+    </ng-container>
+
+      <button *ngIf="isUser()" (click)="onClick()">Add List</button>
+  </div>
+</div>
+
+<!--
+{{message}}
+<app-list-items *ngFor="let leave of leaves" [leave]="leave"> </app-list-items>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"> -->
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <!-- <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container> -->
+
+  <!-- Name Column -->
+  <!-- <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> Type </th>
+    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+  </ng-container> -->
+
+  <!-- Weight Column -->
+  <!-- <ng-container matColumnDef="results">
+    <th mat-header-cell *matHeaderCellDef> Results </th>
+    <td mat-cell *matCellDef="let element"> {{element.results}} </td>
+  </ng-container> -->
+
+  <!-- Symbol Column -->
+  <!-- <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef> Symbol </th>
+    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+  </ng-container> -->
+
+  <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<br>
+<br>
+ -->

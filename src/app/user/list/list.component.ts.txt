@@ -1,0 +1,52 @@
+import { Component, OnInit } from '@angular/core';
+import { User } from '../../User';
+import { AuthService } from '../../service/auth.service';
+// import {animate, state, style, transition, trigger} from '@angular/animations';
+// import { CdkTableDataSourceInput } from '@angular/cdk/table';
+
+export interface Leaves {
+  id?: number,
+  type?: string,
+  results?: string
+}
+
+@Component({
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css'],
+})
+export class ListComponent implements OnInit {
+  userName?:string;
+  leaves!:Leaves[];
+  message!:string;
+
+  // displayedColumns: string[] = ['id', 'type','results'];
+  // dataSource =  this.leaves;
+  // [
+  //   {id: 1 , type: "asd", results:"Aprove"},
+  //   ];;
+
+  constructor(private authService:AuthService) { }
+
+  ngOnInit(): void {
+    this.authService.user;
+    this.authService.getMessage();
+    this.message= this.authService.message;
+    // console.log(this.authService.user[0]?.leaves);
+    // this.userName =this.authService.user[0]?.userName;
+    // this.leaves =this.authService.user[0]?.leaves;
+    this.leaves = [...new Set(this.authService.user[0]?.leaves.map(({id,type,results}) => ({id,type,results})))]
+
+
+  }
+  onClick(){
+    // var unique = [...new Set(this.authService.user[0]?.leaves.map(({id,type,results}) => ({id,type,results})))]
+
+    // console.log(this.authService.user[0]?.leaves);
+    console.log(this.leaves);
+  }
+}
+
+  // const ELEMENT_DATA = [
+  // {id: 1 , type: "asd", results:"Aprove"},
+  // ];

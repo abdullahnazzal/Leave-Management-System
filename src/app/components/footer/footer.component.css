@@ -1,0 +1,31 @@
+.footer{
+  background-color: white;
+  height: 35px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 100%; */
+  border-top:1px solid gray;
+  box-shadow: 2px 2px 10px 10px rgba(0, 0, 0, 0.6);
+  z-index: 101;
+  /* margin-bottom: 30px; */
+}
+
+
+/* footer {
+  background: #f5f5f5;
+  color: #868c96;
+}
+
+footer p {
+  padding: 40px 0;
+  text-align: center;
+}
+
+footer img {
+  width: 44px;
+} */

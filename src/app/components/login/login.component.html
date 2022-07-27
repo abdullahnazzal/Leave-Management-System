@@ -1,0 +1,20 @@
+<main>
+  <div class="container">
+      <div class="txt-login">
+          LOGIN
+      </div>
+      <form class="con" (ngSubmit)="loginHandler()" *ngIf="hasRoute('/')">
+          <div class="email">
+              <input type="text" placeholder="Email" [(ngModel)]="emailUser" [ngModelOptions]="{standalone: true}" id="email" required>
+              <img src="https://cdn-icons-png.flaticon.com/512/4812/4812397.png" alt="email icon">
+          </div>
+          <div class="password">
+              <input type="password" placeholder="Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" id="password" required>
+              <img src="https://cdn-icons-png.flaticon.com/512/4812/4812397.png" alt="email icon">
+          </div>
+
+          <button class="btn-login" (click)="loginHandler()" >LOGIN</button>
+      </form>
+
+  </div>
+</main>
