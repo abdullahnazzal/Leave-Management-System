@@ -5,5 +5,6 @@ export interface Leave{
   endDate: string,
   description: string,
   results: string,
+  reasonOfReject: string,
   userId?: number
 }

@@ -7,6 +7,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatCardModule} from '@angular/material/card';
+
 
 
 import { UserRoutingModule } from './user-routing.module';
@@ -16,7 +19,8 @@ import { ListItemsComponent } from './list-items/list-items.component';
 import { AuthGuard } from '../auth.guard';
 import { UserGuard } from '../user.guard';
 import { HeaderComponent } from '../components/header/header.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialUserModule } from '../material/material-user/material-user.module';
 
 @NgModule({
   declarations: [
@@ -28,14 +32,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
 CommonModule,
     UserRoutingModule,
-    MatTableModule,
-    MatIconModule,
-    MatListModule,
-    FormsModule,
-    MatSelectModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule
+    MaterialUserModule
+
   ],
   providers: [AuthGuard,UserGuard,HeaderComponent],
 })

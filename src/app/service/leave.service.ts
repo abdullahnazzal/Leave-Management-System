@@ -13,6 +13,8 @@ const httpOptions={
 })
 export class LeaveService {
   private apiURL : string = "http://localhost:5000/leaves";
+  reasonOfReject!: string;
+
 
   constructor(private httpClient:HttpClient) { }
 
@@ -26,5 +28,11 @@ export class LeaveService {
 
   updateLeave(leave:Leave, id:any):Observable<Leave>{
     return this.httpClient.put<Leave>(`${this.apiURL}/${id}`,leave,httpOptions)
+  }
+  setReasonOfReject(reason:string){
+    this.reasonOfReject= reason;
+  }
+  getReasonOfReject():string{
+    return this.reasonOfReject;
   }
 }

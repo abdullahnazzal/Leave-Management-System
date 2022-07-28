@@ -1,23 +1,21 @@
-.container{
+.container {
   width: 500px;
-  /* height: 143px; */
-  /* height: 229px; */
-  /* height: 220px; */
   border: 1px solid gray;
   background-color: white;
   border-radius: 3px;
   margin-top: 25%;
-  position: relative;
   margin-bottom: 25%;
 }
 
-.col-flex{
+.col-flex {
   display: flex;
   flex-direction: column;
-  /* margin-bottom: 10px; */
+  justify-content: center;
+  justify-items: center;
+  background-color: rgba(245, 242, 242, 0.35);
 }
 
-.row-flex-header{
+.row-flex-header {
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -26,20 +24,14 @@
   color: gray;
   font-size: 17px;
   font-weight: 700;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   pointer-events: none;
 }
 
-/* .row-flex-header:hover{
-  border-bottom: 1px solid gray;
-  border-right: 1px solid gray;
-  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.6);
-} */
-
-.row-flex-header div{
+.row-flex-header div {
   margin: 20px;
 }
-.container span{
+.container span {
   width: 1px;
   background-color: rgb(128, 128, 128 / 50%);
   position: absolute;
@@ -50,14 +42,17 @@
   box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
-.row-flex-header .type-date-cot{
+.row-flex-header .type-date-cot {
   flex: 1;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-
-
-
-
+.btn-add-leave {
+  display: flex;
+  margin: 10px 4px;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}

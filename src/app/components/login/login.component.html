@@ -1,20 +1,54 @@
 <main>
   <div class="container">
-      <div class="txt-login">
-          LOGIN
-      </div>
-      <form class="con" (ngSubmit)="loginHandler()" *ngIf="hasRoute('/')">
-          <div class="email">
-              <input type="text" placeholder="Email" [(ngModel)]="emailUser" [ngModelOptions]="{standalone: true}" id="email" required>
-              <img src="https://cdn-icons-png.flaticon.com/512/4812/4812397.png" alt="email icon">
-          </div>
-          <div class="password">
-              <input type="password" placeholder="Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" id="password" required>
-              <img src="https://cdn-icons-png.flaticon.com/512/4812/4812397.png" alt="email icon">
-          </div>
-
-          <button class="btn-login" (click)="loginHandler()" >LOGIN</button>
-      </form>
-
+    <div class="txt-login">LOGIN</div>
+    <form
+      class="form-container"
+      (ngSubmit)="loginHandler()"
+      *ngIf="hasRoute('/')"
+    >
+      <mat-form-field class="email" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          [formControl]="emailFormControl"
+          placeholder="Ex. pat@example.com"
+          id="email"
+          #email
+        />
+        <mat-error
+          *ngIf="
+            emailFormControl.hasError('email') &&
+            !emailFormControl.hasError('required')
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input
+          type="password"
+          matInput
+          [formControl]="passwordFormControl"
+          id="password"
+        />
+        <mat-error
+          *ngIf="
+            passwordFormControl.hasError('password') &&
+            !passwordFormControl.hasError('required')
+          "
+        >
+          Please enter a valid password address
+        </mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <button class="btn-login" (click)="loginHandler()">LOGIN</button>
+    </form>
   </div>
 </main>

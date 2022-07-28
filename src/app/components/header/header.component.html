@@ -1,22 +1,26 @@
 <div class="body">
-
   <header class="header">
     <div class="left-header">
-      <img src="https://supersimple.dev/public/img/exercises/youtube/icons/hamburger-menu.svg" alt="menu">
-      <img src="https://cdn-icons-png.flaticon.com/512/198/198141.png" alt="">
-  </div>
-  <div class="middle-header">Leave Management System</div>
-  <div class="right-header" *ngIf="hasRoute('/user/list') || hasRoute('/user/add')">
-    <img src="https://supersimple.dev/public/img/exercises/youtube/channel-profile-pics/my-channel.jpeg" alt="pic">
-    <!-- <span *ngIf="getUser()">{{ (user)?getUser() : null }}</span> -->
-    <span *ngIf="user">{{getUser()}}</span>
-    <button (click)="logoutHandler()">
-      <span>Logout</span>
-    </button>
-  </div>
-</header>
+      <img
+        src="https://supersimple.dev/public/img/exercises/youtube/icons/hamburger-menu.svg"
+        alt="menu"
+      />
+      <img src="https://cdn-icons-png.flaticon.com/512/198/198141.png" alt="" />
+    </div>
+    <div class="middle-header">Leave Management System</div>
+    <div
+      class="right-header"
+      *ngIf="hasRoute('/user/list') || hasRoute('/user/add')"
+    >
+      <img
+        src="https://supersimple.dev/public/img/exercises/youtube/channel-profile-pics/my-channel.jpeg"
+        alt="pic"
+      />
+      <!-- <span *ngIf="getUser()">{{ (user)?getUser() : null }}</span> -->
+      <span *ngIf="currentUser">{{ getUser() }}</span>
+      <button (click)="logoutHandler()">
+        <span>Logout</span>
+      </button>
+    </div>
+  </header>
 </div>
-
-
-
-

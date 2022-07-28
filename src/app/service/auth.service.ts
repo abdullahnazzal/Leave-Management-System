@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { User } from "../User";
 import { HttpClient } from '@angular/common/http';
-import {Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   // user!:User[];
   user:User[]=JSON.parse(localStorage.getItem("user") || "false");
@@ -19,6 +19,7 @@ export class AuthService {
     this.user=user;
     localStorage.setItem("user",JSON.stringify(this.user))
   }
+
   setLoginSatatus(value:boolean):void{
     this.isLoginStatus=value;
     localStorage.setItem("loggedIn",`${value}`)
