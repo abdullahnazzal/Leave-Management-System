@@ -13,12 +13,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  // export class HeaderComponent implements OnInit, OnDestroy {
   currentUser!: User[];
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private sharedServiceService: SharedServiceService,
+    private sharedServiceService: SharedServiceService
   ) {}
 
   HandleUserHeader: Subscription = new Subscription();
@@ -31,7 +32,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.currentUser = this.authService.user;
       });
   }
+  onClick() {
+    console.log(this.authService.user);
+    console.log(this.currentUser);
 
+  }
   ngOnDestroy(): void {
     this.HandleUserHeader.unsubscribe();
   }
@@ -48,9 +53,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   getUser() {
-    if (this.currentUser[0]) {
-      return this.currentUser[0].userName;
-    }
-    return;
+    // if (this.currentUser[0]) {
+      return this.currentUser[0]?.userName;
+    // }
+    // return;
   }
 }

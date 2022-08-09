@@ -3,13 +3,16 @@
     <div class="row-flex-header">
       <div class="no">Add Leaves</div>
     </div>
-    <form (ngSubmit)="addLeaveHandler()">
+    <form [formGroup]="leaveFormGroup" (ngSubmit)="addLeaveHandler()">
       <div class="row-flex-body">
         <div class="col-flex-body">
           <div class="col-lex-body-txt">Type</div>
           <mat-form-field appearance="fill">
             <mat-label>Type</mat-label>
-            <mat-select [(ngModel)]="selectedValue" name="type" required>
+            <mat-select
+            formControlName="selectedValue"
+            name="type"
+            required>
               <mat-option *ngFor="let type of typeLeave" [value]="type.value">
                 {{ type.viewValue }}
               </mat-option>
@@ -25,8 +28,8 @@
             <!-- <mat-label>Favorite food</mat-label> -->
             <input
               matInput
+              formControlName="startDay"
               type="datetime-local"
-              [formControl]="startDay"
               name="startDay"
               id="startDay"
               required
@@ -44,7 +47,7 @@
             <input
               matInput
               type="datetime-local"
-              [formControl]="endDay"
+              formControlName="endDay"
               name="endDay"
               id="endDay"
               [min]='min'
@@ -61,7 +64,7 @@
             <!-- <mat-label>Address 2</mat-label> -->
             <textarea
               matInput
-              [(ngModel)]="description"
+              formControlName="description"
               name="description"
               id="description"
               required
@@ -81,7 +84,6 @@
             type="submit"
             value="Add"
           />
-          <!-- Add Leaves -->
         </div>
       </div>
     </form>

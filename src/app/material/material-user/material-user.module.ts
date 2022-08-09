@@ -6,7 +6,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
@@ -18,14 +17,12 @@ const material = [
   MatTableModule,
   MatIconModule,
   MatListModule,
-  FormsModule,
   MatSelectModule,
   MatInputModule,
   MatFormFieldModule,
   MatButtonModule,
   MatDialogModule,
   MatCardModule,
-  ReactiveFormsModule,
 ];
 
 @NgModule({

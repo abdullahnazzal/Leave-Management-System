@@ -3,10 +3,16 @@ import { LeaveService } from '../../service/leave.service';
 import { Leave } from '../../Leave';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { DialogAddErrorComponent } from '../../dialog-add-error/dialog-add-error.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddConfirmComponent } from '../../dialog-add-confirm/dialog-add-confirm.component';
+
 interface TypeLeave {
   value: string;
   viewValue: string;
@@ -19,64 +25,67 @@ interface TypeLeave {
 })
 export class AddComponent implements OnInit {
   @Output() onAddLeaveOutput: EventEmitter<Leave> = new EventEmitter();
+  leaveFormGroup!: FormGroup;
   leaves: Leave[] = [];
-  type!: string;
-  description!: string;
-  selectedValue!: string;
   typeLeave: TypeLeave[] = [
     { value: 'sick leave', viewValue: 'sick leave' },
     { value: 'annual vacation', viewValue: 'annual vacation' },
   ];
-  startDay = new FormControl();
-  endDay = new FormControl();
+
   min: any;
   constructor(
     private leaveService: LeaveService,
     private authService: AuthService,
     private router: Router,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    private formBuilder: FormBuilder
+  ) {
+    this.leaveFormGroup = formBuilder.group({
+      startDay: new FormControl(),
+      endDay: new FormControl(),
+      description: new FormControl(),
+      selectedValue: new FormControl(),
+    });
+  }
 
   ngOnInit(): void {
     this.leaveService.getLeaves().subscribe((leave) => {
       this.leaves = leave;
     });
-    this.startDay;
     var today = new Date();
-    this.startDay.setValue(
-      today.toISOString().slice(0, today.toISOString().length - 5)
-    );
+    this.leaveFormGroup.patchValue({
+      startDay: today.toISOString().slice(0, today.toISOString().length -5 ),
+    });
 
     this.min = today.toISOString().slice(0, today.toISOString().length - 5);
   }
 
   addLeaveHandler() {
-    // console.log(this.selectedValue);
-
-    if (!this.endDay.valid || !this.description || !this.selectedValue) {
+    if (!this.leaveFormGroup.valid) {
       this.dialog.open(DialogAddErrorComponent);
       return;
     }
-    var leave={
-      "id": this.leaves.length+1,
-      "type": this.selectedValue,
-      "startDate":this.startDay.value,
-      "endDate": this.endDay.value,
-      "description": this.description,
-      "results": "waiting",
-      "reasonOfReject": 'none',
-      "userId": this.authService.user[0].id
-    }
-    let dialogRef =this.dialog.open(DialogAddConfirmComponent);
-        dialogRef.afterClosed().subscribe(result=>{
-          if (result === 'true') {
-            // console.log(`Dialog: ${result}`);
-            this.onAddLeaveOutput.emit(leave)
-            this.leaveService.addLeave(leave).subscribe((leave)=>(this.leaves.push(leave)))
-            this.router.navigate(['user/list']);
-          }
 
-        })
+    var leave = {
+      id: this.leaves.length + 1,
+      type: this.leaveFormGroup.value.selectedValue,
+      startDate: this.leaveFormGroup.value.startDay,
+      endDate: this.leaveFormGroup.value.endDay,
+      description: this.leaveFormGroup.value.description,
+      results: 'waiting',
+      reasonOfReject: 'none',
+      userId: this.authService.user[0].id,
+    };
+
+    let dialogRef = this.dialog.open(DialogAddConfirmComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'true') {
+        this.leaveService
+        .addLeave(leave)
+        .subscribe((leave) => this.leaves.push(leave));
+        this.router.navigate(['user/list']);
+      }
+    });
   }
   myListNav() {
     this.router.navigate(['user/list']);

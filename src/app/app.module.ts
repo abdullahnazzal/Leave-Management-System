@@ -18,13 +18,13 @@ import { DialogRejectReasonComponent } from './dialog-reject-reason/dialog-rejec
 
 import { MaterialModule } from './material/material.module';
 
-const appRoutes: Routes = [
-  {
-    path: '',
-    component: LoginComponent,
-    canActivate: [UserGuard],
-  },
-];
+// const appRoutes: Routes = [
+//   {
+//     path: '',
+//     component: LoginComponent,
+//     canActivate: [UserGuard],
+//   },
+// ];
 
 @NgModule({
   declarations: [
@@ -44,9 +44,9 @@ const appRoutes: Routes = [
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
-    RouterModule.forRoot(appRoutes),
+    // RouterModule.forRoot(appRoutes),
   ],
-  providers: [UserGuard],
+  // providers: [UserGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

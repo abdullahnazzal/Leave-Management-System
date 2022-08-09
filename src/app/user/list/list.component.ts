@@ -46,6 +46,12 @@ export class ListComponent implements OnInit {
         }
       });
     });
+
+    // this.HandleUserHeader = this.sharedServiceService
+    //   .getHandleUserHeader()
+    //   .subscribe(() => {
+    //     this.currentUser = this.authService.user;
+    //   });
   }
 
   onClick() {

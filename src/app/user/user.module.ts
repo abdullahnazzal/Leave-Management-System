@@ -24,7 +24,6 @@ import { MaterialUserModule } from '../material/material-user/material-user.modu
 
 @NgModule({
   declarations: [
-    // HeaderComponent,
     ListComponent,
     AddComponent,
     ListItemsComponent
@@ -32,6 +31,8 @@ import { MaterialUserModule } from '../material/material-user/material-user.modu
   imports: [
 CommonModule,
     UserRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     MaterialUserModule
 
   ],

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Leave } from '../Leave';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 const httpOptions={
   headers: new HttpHeaders({
@@ -14,7 +14,6 @@ const httpOptions={
 export class LeaveService {
   private apiURL : string = "http://localhost:5000/leaves";
   reasonOfReject!: string;
-
 
   constructor(private httpClient:HttpClient) { }
 
@@ -35,4 +34,9 @@ export class LeaveService {
   getReasonOfReject():string{
     return this.reasonOfReject;
   }
+
+  // handleGetLeaves = new Subject();
+  // getHandleGetLeaves(){
+  //   return this.handleGetLeaves.asObservable();
+  // }
 }

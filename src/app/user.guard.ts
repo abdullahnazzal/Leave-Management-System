@@ -6,7 +6,7 @@ import { AuthService } from './service/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserGuard implements CanActivate {
+export class UserGuard implements CanActivate{
   constructor(private authService:AuthService, private router:Router){}
 
   canActivate(
@@ -14,15 +14,7 @@ export class UserGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if (this.authService.loginSatatus !== false) {
         this.router.navigate(['user/list']);
-        // console.log(this.authService.loginSatatus);
       }
-      // if (this.authService.loginSatatus === true) {
-      //   this.router.navigate(['']);
-      // console.log(this.authService.loginSatatus);
-
-      // }
-
       return !this.authService.loginSatatus;
   }
-
 }

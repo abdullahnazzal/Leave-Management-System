@@ -31,6 +31,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
         <input
+          autocomplete
           type="password"
           matInput
           [formControl]="passwordFormControl"
@@ -48,7 +49,8 @@
           Password is <strong>required</strong>
         </mat-error>
       </mat-form-field>
-      <button class="btn-login" (click)="loginHandler()">LOGIN</button>
+      <button class="btn-login" >LOGIN</button>
+      <!-- <button class="btn-login" (click)="loginHandler()">LOGIN</button> -->
     </form>
   </div>
 </main>
