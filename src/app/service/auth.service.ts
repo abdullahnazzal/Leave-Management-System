@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import { User } from "../User";
-import { HttpClient } from '@angular/common/http';
+import { User } from "../user/User";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  // user!:User[];
   user:User[]=JSON.parse(localStorage.getItem("user") || "false");
   message!:string;
 
   private isLoginStatus:boolean=JSON.parse(localStorage.getItem("loggedIn") || "false");
 
-  constructor(private http:HttpClient) { }
+  constructor() { }
 
   setUser(user:User[]):void{
     this.user=user;

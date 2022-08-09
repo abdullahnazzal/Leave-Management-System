@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { User } from '../../User';
+import { User } from '../User';
 import { AuthService } from '../../service/auth.service';
-import { Leave } from '../../Leave';
+import { Leave } from '../Leave';
 import { LeaveService } from '../../service/leave.service';
 import { Router } from '@angular/router';
 

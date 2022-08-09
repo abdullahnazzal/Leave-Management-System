@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
-import { User } from '../../User';
+import { User } from '../../user/User';
 import { AuthService } from '../../service/auth.service';
 import { SharedServiceService } from '../../service/shared-service.service';
 import { ErrorStateMatcher } from '@angular/material/core';

@@ -6,5 +6,6 @@ export interface Leave{
   description: string,
   results: string,
   reasonOfReject: string,
-  userId?: number
+  userId?: number,
+  userResultId?:number | string
 }

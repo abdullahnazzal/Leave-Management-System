@@ -1,9 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../service/user.service';
-import { User } from '../../User';
+import { User } from '../../user/User';
 import { AuthService } from '../../service/auth.service';
-import { LoginComponent } from '../login/login.component';
 import { SharedServiceService } from '../../service/shared-service.service';
 import { Subscription } from 'rxjs';
 
@@ -33,7 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       });
   }
   onClick() {
-    console.log(this.authService.user);
+    console.log(this.authService.user[0].id);
     console.log(this.currentUser);
 
   }
@@ -53,9 +51,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   getUser() {
-    // if (this.currentUser[0]) {
-      return this.currentUser[0]?.userName;
-    // }
-    // return;
+    if (this.authService.user[0]) {
+      return this.authService.user[0]?.userName;
+    }
+    return;
   }
 }

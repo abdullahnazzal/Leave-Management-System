@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LeaveService } from '../../service/leave.service';
-import { Leave } from '../../Leave';
+import { Leave } from '../Leave';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 import {
@@ -75,6 +75,7 @@ export class AddComponent implements OnInit {
       results: 'waiting',
       reasonOfReject: 'none',
       userId: this.authService.user[0].id,
+      userResultId:"null"
     };
 
     let dialogRef = this.dialog.open(DialogAddConfirmComponent);

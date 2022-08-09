@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Leave } from '../../Leave';
+import { Leave } from '../Leave';
 import { AuthService } from '../../service/auth.service';
-import { User } from '../../User';
+import { User } from '../User';
 import { UserService } from '../../service/user.service';
 import { LeaveService } from '../../service/leave.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -72,6 +72,7 @@ export class ListItemsComponent implements OnInit {
       results: 'aprove',
       reasonOfReject: 'none',
       userId: this.leave.userId,
+      userResultId: this.authService.user[0].id,
     };
 
     let dialogRef = this.dialog.open(DialogApproveConfirmComponent);
@@ -94,6 +95,7 @@ export class ListItemsComponent implements OnInit {
           results: 'rejected',
           reasonOfReject: this.leaveService.getReasonOfReject(),
           userId: this.leave.userId,
+          userResultId: this.authService.user[0].id,
         };
         this.handleRejectOutput.emit(currentLeave);
       }

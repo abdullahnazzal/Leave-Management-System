@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Leave } from '../Leave';
+import { Leave } from '../user/Leave';
 import { Observable, Subject } from 'rxjs';
 
 const httpOptions={
@@ -35,8 +35,4 @@ export class LeaveService {
     return this.reasonOfReject;
   }
 
-  // handleGetLeaves = new Subject();
-  // getHandleGetLeaves(){
-  //   return this.handleGetLeaves.asObservable();
-  // }
 }

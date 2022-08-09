@@ -2,17 +2,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddComponent } from './add/add.component';
 import { ListComponent } from './list/list.component';
-import { AuthGuard } from '../auth.guard';
+import { AuthGuard } from '../guard/auth.guard';
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     canActivateChild: [AuthGuard],
-    children:[
+    children: [
       { path: 'list', component: ListComponent },
       { path: 'add', component: AddComponent },
-    ]
-  }
+    ],
+  },
 ];
 
 @NgModule({
