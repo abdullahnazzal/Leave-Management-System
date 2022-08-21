@@ -18,7 +18,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private router: Router,
     private authService: AuthService,
     private sharedServiceService: SharedServiceService
-  ) {}
+  ) {
+    console.log("HEADER CONSTRUCTOR");
+
+  }
 
   HandleUserHeader: Subscription = new Subscription();
 
@@ -59,12 +62,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return;
   }
   toggleArrow(...close:any){
-    console.log(close[0].closed);
-    if (close !== null) {
-      if (close[0].closed === false) {
+    // console.log(close[0].closed);
         this.expandedElement= !this.expandedElement;
-        }
-    }
-    this.expandedElement= !this.expandedElement;
   }
 }

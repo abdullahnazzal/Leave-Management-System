@@ -10,16 +10,16 @@ import { AuthService } from './service/auth.service';
 })
 export class AppComponent {
   title = 'leaves-app';
-
+  satatus:boolean=false;
   constructor(
     private router: Router,
     private authService:AuthService
-    ) {}
+    ) {
+    }
 
   hasRoute(route: string) {
     return this.router.url === route;
   }
-
   // handleHeader(componentRef: any) {
   //   const child: LoginComponent = componentRef;
   //   child.handleUserHeaderOuput.subscribe(() => {

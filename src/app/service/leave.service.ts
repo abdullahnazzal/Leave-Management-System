@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Leave } from '../user/Leave';
 import { Observable, Subject } from 'rxjs';
 import { LeaveShow } from '../user/list/list.component';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,7 +14,8 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class LeaveService {
-  private apiURL: string = 'http://localhost:8080/api/v1/leave';
+  private apiURL: string = `${environment.apiURL}/leave`;
+  // private apiURL: string = 'http://localhost:8080/api/v1/leave';
   reasonOfReject!: string;
 
   constructor(private httpClient: HttpClient) {}
