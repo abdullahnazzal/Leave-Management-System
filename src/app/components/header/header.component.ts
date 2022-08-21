@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../user/User';
 import { AuthService } from '../../service/auth.service';
@@ -11,9 +11,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  // export class HeaderComponent implements OnInit, OnDestroy {
   currentUser!: User[];
-
+  @Input() imgURL!:String;
+  expandedElement:boolean=false;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.currentUser = this.authService.user;
+    this.imgURL=this.currentUser[0].imgURL;
     this.HandleUserHeader = this.sharedServiceService
       .getHandleUserHeader()
       .subscribe(() => {
@@ -40,6 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logoutHandler() {
+
     this.authService.logout();
     if (localStorage.getItem('loggedIn')) {
       this.router.navigate(['']);
@@ -55,5 +57,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
       return this.authService.user[0]?.userName;
     }
     return;
+  }
+  toggleArrow(...close:any){
+    console.log(close[0].closed);
+    if (close !== null) {
+      if (close[0].closed === false) {
+        this.expandedElement= !this.expandedElement;
+        }
+    }
+    this.expandedElement= !this.expandedElement;
   }
 }

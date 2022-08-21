@@ -1,4 +1,21 @@
-.header {
+.example-spacer {
+  flex: 1 1 auto;
+}
+mat-toolbar .img-logo{
+  height: 50px;
+}
+
+.img-profile {
+  border: 1px solid gray;
+  border-radius: 50%;
+  /* background-size: 10px; */
+  height: 45px;
+  width: 45px;
+}
+mat-toolbar .mat-menu{
+  margin-top: 10px;
+}
+/* .header {
   background-color: white;
   margin: 0;
   padding: 0;
@@ -24,4 +41,4 @@
   height: 40px;
   width: 40px;
   margin-right: 10px;
-}
+} */

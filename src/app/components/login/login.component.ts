@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
   valid: boolean = true;
   @ViewChild('email') inputEmail: any;
   @ViewChild('password') inputPassword: any;
+  hide = true;
+
 
   emailFormControl = new FormControl('', [
     Validators.required,

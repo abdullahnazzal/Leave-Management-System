@@ -19,6 +19,8 @@ export class ListItemsComponent implements OnInit {
   @Output() handleRejectOutput: EventEmitter<Leave> = new EventEmitter();
 
   user: User[] = [];
+
+
   constructor(
     private authService: AuthService,
     private userService: UserService,
@@ -38,21 +40,21 @@ export class ListItemsComponent implements OnInit {
 
   //If status of leaves is waiting return true
   handlePendingImg() {
-    if (this.leave.results === 'waiting') {
+    if (this.leave.status === 'waiting') {
       return true;
     }
     return false;
   }
   //If status of leaves is aprove return true
   handleApproveImg() {
-    if (this.leave.results === 'aprove') {
+    if (this.leave.status === 'aprove') {
       return true;
     }
     return false;
   }
   //If status of leaves is rejected return true
   handleRejectedImg() {
-    if (this.leave.results === 'rejected') {
+    if (this.leave.status === 'rejected') {
       return true;
     }
     return false;
@@ -69,10 +71,10 @@ export class ListItemsComponent implements OnInit {
       startDate: this.leave.startDate,
       endDate: this.leave.endDate,
       description: this.leave.description,
-      results: 'aprove',
+      status: 'aprove',
       reasonOfReject: 'none',
       userId: this.leave.userId,
-      userResultId: this.authService.user[0].id,
+      mangerId: this.authService.user[0],
     };
 
     let dialogRef = this.dialog.open(DialogApproveConfirmComponent);
@@ -92,7 +94,7 @@ export class ListItemsComponent implements OnInit {
           startDate: this.leave.startDate,
           endDate: this.leave.endDate,
           description: this.leave.description,
-          results: 'rejected',
+          status: 'rejected',
           reasonOfReject: this.leaveService.getReasonOfReject(),
           userId: this.leave.userId,
           userResultId: this.authService.user[0].id,

@@ -8,7 +8,8 @@ import { User } from '../user/User';
   providedIn: 'root'
 })
 export class UserService {
-  private apiURL="http://localhost:5000/user";
+  // private apiURL="http://localhost:5000/user";
+  private apiURL="http://localhost:8080/api/v1/user";
   constructor(private http:HttpClient) { }
 
   getUser():Observable<User[]>{

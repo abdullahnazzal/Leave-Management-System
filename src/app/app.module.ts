@@ -17,6 +17,8 @@ import { DialogApproveConfirmComponent } from './dialog-approve-confirm/dialog-a
 import { DialogRejectReasonComponent } from './dialog-reject-reason/dialog-reject-reason.component';
 
 import { MaterialModule } from './material/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { DialogLoadingComponent } from './dialog-loading/dialog-loading.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { MaterialModule } from './material/material.module';
     DialogAddConfirmComponent,
     DialogApproveConfirmComponent,
     DialogRejectReasonComponent,
+    DialogLoadingComponent,
   ],
   entryComponents: [DialogLoginErrorComponent],
   imports: [
@@ -36,6 +39,7 @@ import { MaterialModule } from './material/material.module';
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
+    FlexLayoutModule
   ],
   bootstrap: [AppComponent],
 })

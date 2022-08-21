@@ -10,8 +10,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 
-
-
 import { UserRoutingModule } from './user-routing.module';
 import { ListComponent } from './list/list.component';
 import { AddComponent } from './add/add.component';
@@ -22,18 +20,22 @@ import { HeaderComponent } from '../components/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialUserModule } from '../material/material-user/material-user.module';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 @NgModule({
   declarations: [
     ListComponent,
     AddComponent,
     ListItemsComponent
+    // HeaderComponent
   ],
   imports: [
 CommonModule,
     UserRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialUserModule
+    MaterialUserModule,
+    FlexLayoutModule
 
   ],
   providers: [AuthGuard,UserGuard,HeaderComponent],

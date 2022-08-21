@@ -1,5 +1,20 @@
+<mat-card class="example-card">
+  <mat-card-title>Start Date: {{ formatDate(leave.startDate) }}</mat-card-title>
+  <mat-card-title>End Date: {{ formatDate(leave.startDate) }}</mat-card-title>
+  <mat-card-content>
+    <p>Description : {{leave.description}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="handleApprove()" color="primary" mat-flat-button>
+      Approve
+    </button>
+    <button (click)="handleReject()" color="warn" mat-flat-button>
+      Reject
+    </button>
+  </mat-card-actions>
+</mat-card>
 <!-- List Of Leaves For Normal User 'employee' -->
-<mat-card class="example-card" *ngIf="isUser()">
+<!-- <mat-card class="example-card" *ngIf="isUser()">
   <mat-card-content class="mat-card-content-user">
     <p>{{ leave.id }}</p>
   </mat-card-content>
@@ -46,4 +61,4 @@
       Reject
     </button>
   </mat-action-list>
-</mat-card>
+</mat-card> -->

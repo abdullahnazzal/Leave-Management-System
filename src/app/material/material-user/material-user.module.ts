@@ -23,6 +23,8 @@ const material = [
   MatButtonModule,
   MatDialogModule,
   MatCardModule,
+  MatMenuModule,
+  MatToolbarModule
 ];
 
 @NgModule({

@@ -1,11 +1,12 @@
+import { User } from './User';
 export interface Leave{
   id?: number,
   type: string,
   startDate: string,
   endDate: string,
   description: string,
-  results: string,
+  status: string,
   reasonOfReject: string,
-  userId?: number,
-  userResultId?:number | string
+  userId?: User | null | undefined,
+  mangerId?:User | null
 }
