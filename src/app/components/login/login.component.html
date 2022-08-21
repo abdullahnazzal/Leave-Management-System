@@ -1,20 +1,107 @@
-<main>
-  <div class="container">
-      <div class="txt-login">
-          LOGIN
+<div class="container" fxLayout="row" fxLayoutAlign="space-between">
+  <!-- Left Side -->
+  <div class="left" fxLayout="column" fxLayoutAlign="start center">
+    <div class="container_left" fxLayout="column">
+      <div class="img" fxFlexOffset="60px">
+        <img src="../../../assets/logo.png" alt="logo" />
       </div>
-      <form class="con" (ngSubmit)="loginHandler()" *ngIf="hasRoute('/')">
-          <div class="email">
-              <input type="text" placeholder="Email" [(ngModel)]="emailUser" [ngModelOptions]="{standalone: true}" id="email" required>
-              <img src="https://cdn-icons-png.flaticon.com/512/4812/4812397.png" alt="email icon">
-          </div>
-          <div class="password">
-              <input type="password" placeholder="Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" id="password" required>
-              <img src="https://cdn-icons-png.flaticon.com/512/4812/4812397.png" alt="email icon">
-          </div>
+      <form
+        fxLayout="column"
+        class="login_form"
+        (ngSubmit)="loginHandler()"
+        *ngIf="hasRoute('/login')"
+      >
+        <label fxFlexOffset="30px" for="email">Email</label>
+        <mat-form-field class="email" appearance="outline">
+          <input
+            type="email"
+            matInput
+            [formControl]="emailFormControl"
+            placeholder="Enter Your Email"
+            id="email"
+            #email
+          />
+          <mat-icon class="satisfied" matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-error
+            *ngIf="
+              emailFormControl.hasError('email') &&
+              !emailFormControl.hasError('required')
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
 
-          <button class="btn-login" (click)="loginHandler()" >LOGIN</button>
+        <label fxFlexOffset="20px" for="password">Password</label>
+
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            autocomplete
+            type="password"
+            matInput
+            placeholder="Enter Your Password"
+            [formControl]="passwordFormControl"
+            id="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+
+          <mat-error
+            *ngIf="
+              passwordFormControl.hasError('password') &&
+              !passwordFormControl.hasError('required')
+            "
+          >
+            Please enter a valid password address
+          </mat-error>
+          <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+          fxFlexOffset="15px"
+          class="remember_forget"
+        >
+          <div fxLayout="row" class="cot_remember">
+            <input type="checkbox" name="remember" id="remember" />
+            <label for="remember" class="remember_txt">Remember me</label>
+          </div>
+          <div>
+            <a class="forget_btn" href="#" target="_blank">Forget password</a>
+          </div>
+        </div>
+        <button class="btn_sign_in" fxFlexOffset="15px" (click)="loginHandler()">Sign In</button>
       </form>
-
+    </div>
   </div>
-</main>
+  <!-- Right Side -->
+  <div class="right" fxLayout="row" fxFlexAlign="end end" fxFlexOrder="1">
+    <img src="../../../assets/Untitled.png" alt="leave_management_software" />
+  </div>
+</div>
+<!-- <main> -->
+
+<!--
+  <mat-form-field appearance="fill">
+
+      <button class="btn-login" >LOGIN</button> -->
+<!-- ------------------------------------ -->
+<!-- <button class="btn-login" (click)="loginHandler()">LOGIN</button> -->
+<!-- ------------------------------------ -->
+<!-- </form>
+  </div> -->
+<!-- </main> -->

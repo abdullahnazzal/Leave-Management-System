@@ -1,12 +1,5 @@
-<body>
-
-  <app-header *ngIf="hasRoute('/')"></app-header>
-  <app-header *ngIf="hasRoute('/user/list')"></app-header>
-  <app-header *ngIf="hasRoute('/user/add')"></app-header>
-
-
-  <router-outlet></router-outlet>
-  <!-- <app-login></app-login> -->
-  <!-- <app-user *ngIf="hasRoute('/user')"></app-user> -->
-  <app-footer></app-footer>
-</body>
+<!-- <ng-container *ngIf="satatus"> -->
+  <app-header *ngIf="!hasRoute('/login')" ></app-header>
+<!-- </ng-container> -->
+<router-outlet></router-outlet>
+<!-- <app-footer></app-footer> -->

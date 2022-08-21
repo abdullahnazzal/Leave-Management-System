@@ -1,22 +1,20 @@
-<div class="body">
-
-  <header class="header">
-    <div class="left-header">
-      <img src="https://supersimple.dev/public/img/exercises/youtube/icons/hamburger-menu.svg" alt="menu">
-      <img src="https://cdn-icons-png.flaticon.com/512/198/198141.png" alt="">
-  </div>
-  <div class="middle-header">Leave Management System</div>
-  <div class="right-header" *ngIf="hasRoute('/user/list') || hasRoute('/user/add')">
-    <img src="https://supersimple.dev/public/img/exercises/youtube/channel-profile-pics/my-channel.jpeg" alt="pic">
-    <!-- <span *ngIf="getUser()">{{ (user)?getUser() : null }}</span> -->
-    <span *ngIf="user">{{getUser()}}</span>
-    <button (click)="logoutHandler()">
-      <span>Logout</span>
+<mat-toolbar>
+  <img class="img-logo" src="../../../assets/logo.png" alt="logo">
+  <span>DashBoard</span>
+  <span class="example-spacer"></span>
+    <img class="img-profile" mat-card-image src={{imgURL}} alt="img-profile">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" (click)="toggleArrow(menu.close)">
+      <!-- <mat-icon>expand_more</mat-icon> -->
+      <mat-icon *ngIf="!expandedElement"
+              >keyboard_arrow_down</mat-icon
+            >
+            <mat-icon *ngIf="expandedElement"
+              >keyboard_arrow_up</mat-icon>
     </button>
-  </div>
-</header>
-</div>
-
-
-
-
+    <mat-menu #menu="matMenu" class="mat-menu">
+      <button mat-menu-item (click)="logoutHandler();">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+</mat-toolbar>

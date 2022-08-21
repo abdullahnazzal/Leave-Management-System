@@ -1,52 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../service/user.service';
-import { User } from '../../User';
+import { User } from '../../user/User';
 import { AuthService } from '../../service/auth.service';
+import { SharedServiceService } from '../../service/shared-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
-  user!:User[]
+export class HeaderComponent implements OnInit, OnDestroy {
+  currentUser!: User[];
+  @Input() imgURL!:String;
+  expandedElement:boolean=false;
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private sharedServiceService: SharedServiceService
+  ) {
+    console.log("HEADER CONSTRUCTOR");
 
-  constructor(private router:Router,private authService:AuthService) {   }
+  }
+
+  HandleUserHeader: Subscription = new Subscription();
 
   ngOnInit(): void {
-    // if (this.user) {
-      this.user=this.authService.user;
-    // }
+    this.currentUser = this.authService.user;
+    this.imgURL=this.currentUser[0].imgURL;
+    this.HandleUserHeader = this.sharedServiceService
+      .getHandleUserHeader()
+      .subscribe(() => {
+        this.currentUser = this.authService.user;
+      });
   }
-  logoutHandler(){
-    console.log(localStorage.getItem('loggedIn')+ "localStorage.getItem('loggedIn')");
-    // localStorage.removeItem('loggedIn')
-    // localStorage.removeItem('user')
-    // this.authService.setLoginSatatus(false)
-    // this.authService.setUser([])
-    this.authService.logout()
-    console.log(this.authService.loginSatatus+"this.authService.loginSatatus");
-    console.log(!localStorage.getItem('loggedIn'));
+  onClick() {
+    console.log(this.authService.user[0].id);
+    console.log(this.currentUser);
 
+  }
+  ngOnDestroy(): void {
+    this.HandleUserHeader.unsubscribe();
+  }
+
+  logoutHandler() {
+
+    this.authService.logout();
     if (localStorage.getItem('loggedIn')) {
-      console.log("this.authService.loginSatatus"+this.authService.loginSatatus);
-      console.log("this.authService.user"+this.authService.user);
-      console.log("localStorage.length"+localStorage.length);
-      console.log("localStorage.length"+localStorage.length);
-
-
-      this.router.navigate([''])
+      this.router.navigate(['']);
     }
   }
-  hasRoute(route:string){
-    return this.router.url === route
+
+  hasRoute(route: string) {
+    return this.router.url === route;
   }
 
-  getUser(){
-    if (this.user[0]) {
-      return this.user[0].userName
+  getUser() {
+    if (this.authService.user[0]) {
+      return this.authService.user[0]?.userName;
     }
-    return
+    return;
+  }
+  toggleArrow(...close:any){
+    // console.log(close[0].closed);
+        this.expandedElement= !this.expandedElement;
   }
 }

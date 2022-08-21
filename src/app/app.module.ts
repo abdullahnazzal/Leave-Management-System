@@ -1,33 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from "@angular/common/http";
-import { RouterModule, Routes } from "@angular/router";
-import {  MatMenuModule } from '@angular/material/menu';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
 import { FooterComponent } from './components/footer/footer.component';
-// import { UserComponent } from './components/user/user.component';
 
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import { MatSortModule } from '@angular/material/sort';
-import { UserGuard } from './user.guard';
+import { UserGuard } from './guard/user.guard';
+import { DialogLoginErrorComponent } from './dialog-login-error/dialog-login-error.component';
+import { DialogAddErrorComponent } from './dialog-add-error/dialog-add-error.component';
+import { DialogAddConfirmComponent } from './dialog-add-confirm/dialog-add-confirm.component';
+import { DialogApproveConfirmComponent } from './dialog-approve-confirm/dialog-approve-confirm.component';
+import { DialogRejectReasonComponent } from './dialog-reject-reason/dialog-reject-reason.component';
 
-const appRoutes:Routes=[
-  {
-    path:"",
-    component:LoginComponent,
-    canActivate:[UserGuard]
-  }
-  // {path:"",component:LoginComponent}
-  // {path:"user",component:UserComponent}
-]
+import { MaterialModule } from './material/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { DialogLoadingComponent } from './dialog-loading/dialog-loading.component';
 
 @NgModule({
   declarations: [
@@ -35,26 +26,21 @@ const appRoutes:Routes=[
     HeaderComponent,
     LoginComponent,
     FooterComponent,
-    // UserComponent
+    DialogLoginErrorComponent,
+    DialogAddErrorComponent,
+    DialogAddConfirmComponent,
+    DialogApproveConfirmComponent,
+    DialogRejectReasonComponent,
+    DialogLoadingComponent,
   ],
+  entryComponents: [DialogLoginErrorComponent],
   imports: [
-  BrowserModule,
+    BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatInputModule,
-    FormsModule,
     HttpClientModule,
-
-    MatMenuModule,
-    MatSortModule,
-
-    RouterModule.forRoot(appRoutes)
-    // RouterModule.forRoot(appRoutes,{enableTracing:true})
-
+    MaterialModule,
+    FlexLayoutModule
   ],
-  providers: [UserGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

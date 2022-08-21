@@ -1,76 +1,219 @@
-<!-- <div class="container">
-  <mat-list>
-    <app-list-items *ngFor="let leave of leaves" [leave]="leave"></app-list-items>
-  </mat-list>
-</div> -->
-
-<div class="container">
-  <div class="col-flex">
-      <div *ngIf="isUser()" class="row-flex-header">
-          <div class="no">N0.</div>
-          <div class="type-date-cot">Type</div>
-          <div class="results">Results</div>
-      </div>
-      <span></span>
-      <ng-container *ngIf="isUser()">
-        <app-list-items  *ngFor="let leave of leaves" [leave]="leave"></app-list-items>
+<!-- <app-header></app-header> -->
+<!-- For Normal User -->
+<div
+  class="container"
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+  *ngIf="isUser()"
+>
+  <div class="header" fxLayout="row" fxLayoutAlign="space-between">
+    <div class="left" fxLayout="row">
+      <mat-icon>apps</mat-icon>
+      <h2>Leave /</h2>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" class="mat-menu">
+        <button mat-menu-item (click)="filter()">
+          <span>ALL</span>
+        </button>
+        <button mat-menu-item (click)="filter(status=0)">
+          <span>PENDING</span>
+        </button>
+        <button mat-menu-item (click)="filter(status=1)">
+          <span>APPROVED</span>
+        </button>
+        <button mat-menu-item (click)="filter(status=2)">
+          <span>REJECTED</span>
+        </button>
+      </mat-menu>
+      <!-- <mat-icon>expand_more</mat-icon> -->
+    </div>
+    <div class="right" fxLayout="row">
+      <mat-icon>add</mat-icon>
+      <a (click)="onClick()">Add Leave</a>
+    </div>
+  </div>
+  <div class="cont-title">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      multiTemplateDataRows
+      class="mat-elevation-z8"
+    >
+      <ng-container
+        matColumnDef="{{column}}"
+        *ngFor="let column of displayedColumns"
+      >
+        <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+        <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
       </ng-container>
-      <ng-container *ngIf="!isUser()">
-      <app-list-items *ngFor="let leave of leavesForManger" [leave]="leave" (handleApproveOutput)="handleApprove($event)" (handleRejectOutput)="handleReject($event)"></app-list-items>
-    </ng-container>
 
-      <button *ngIf="isUser()" (click)="onClick()">Add List</button>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let element; columns: displayedColumns" class="example-element-row"></tr>
+    </table>
+
   </div>
 </div>
 
-<!--
-{{message}}
-<app-list-items *ngFor="let leave of leaves" [leave]="leave"> </app-list-items>
--->
+<!-- For Manger User -->
+
+<div
+  class="container"
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+  *ngIf="!isUser()"
+>
+  <div class="cont-title">
+    <table
+      mat-table
+      [dataSource]="dataSourceManger"
+      multiTemplateDataRows
+      class="mat-elevation-z8"
+    >
+      <ng-container
+        matColumnDef="{{column}}"
+        *ngFor="let column of displayedColumnsManger"
+      >
+        <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+        <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+      </ng-container>
+      <ng-container matColumnDef="expand">
+        <th mat-header-cell *matHeaderCellDef aria-label="row actions">
+          &nbsp;
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-icon-button
+            aria-label="expand row"
+            (click)="
+              expandedElement = expandedElement === element ? null : element;
+              $event.stopPropagation()
+            "
+          >
+            <mat-icon *ngIf="expandedElement !== element"
+              >keyboard_arrow_down</mat-icon
+            >
+            <mat-icon *ngIf="expandedElement === element"
+              >keyboard_arrow_up</mat-icon
+            >
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [attr.colspan]="columnsToDisplayWithExpand.length"
+        >
+          <div
+            class="example-element-detail"
+            [@detailExpand]="
+            element == expandedElement ? 'expanded' : 'collapsed'">
+            <mat-card class="example-card">
+              <mat-card-title>Start Date: {{ formatDate(element.startDate) }}</mat-card-title>
+              <mat-card-title>End Date: {{ formatDate(element.startDate) }}</mat-card-title>
+              <mat-card-content>
+                <p>Description : {{element.description}}</p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button (click)="handleApprove(element)" color="primary" mat-flat-button>
+                  Approve
+                </button>
+                <button (click)="handleReject(element)" color="warn" mat-flat-button>
+                  Reject
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+      <tr
+        mat-row
+        *matRowDef="let element; columns: columnsToDisplayWithExpand"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="example-detail-row"
+      ></tr>
+    </table>
+  </div>
+</div>
+
+<!-- <div class="container">
+  <div class="col-flex">
+    <div *ngIf="isUser()" class="row-flex-header">
+      <div class="no">N0.</div>
+      <div class="type-date-cot">Type</div>
+      <div class="results">Results</div>
+    </div>
+    <span></span>
+    <ng-container *ngIf="isUser()">
+      <app-list-items
+        *ngFor="let leave of leaves"
+        [leave]="leave"
+      ></app-list-items>
+    </ng-container>
+    <ng-container *ngIf="!isUser()">
+      <app-list-items
+        *ngFor="let leave of leavesForManger"
+        [leave]="leave"
+        (handleApproveOutput)="handleApprove($event)"
+        (handleRejectOutput)="handleReject($event)"
+      ></app-list-items>
+      <div *ngIf="isLeaveEmpty()">
+        <mat-card>
+          <mat-card-title-group>
+            <mat-card-title>No Leaves To Approve</mat-card-title>
+          </mat-card-title-group>
+        </mat-card>
+      </div>
+    </ng-container>
+    <div class="btn-add-leave">
+      <button
+        mat-raised-button
+        color="primary"
+        *ngIf="isUser()"
+        (click)="onClick()"
+      >
+        Add List
+      </button>
+    </div>
+  </div>
+</div> -->
 
 
+  <!--
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.position }} </mat-cell>
+      </ng-container>
 
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.type }} </mat-cell>
+      </ng-container>
 
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.date }} </mat-cell>
+      </ng-container>
 
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.status }} </mat-cell>
+      </ng-container>
 
-
-
-
-
-
-
-<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"> -->
-
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-  <!-- Position Column -->
-  <!-- <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> No. </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container> -->
-
-  <!-- Name Column -->
-  <!-- <ng-container matColumnDef="type">
-    <th mat-header-cell *matHeaderCellDef> Type </th>
-    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-  </ng-container> -->
-
-  <!-- Weight Column -->
-  <!-- <ng-container matColumnDef="results">
-    <th mat-header-cell *matHeaderCellDef> Results </th>
-    <td mat-cell *matCellDef="let element"> {{element.results}} </td>
-  </ng-container> -->
-
-  <!-- Symbol Column -->
-  <!-- <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef> Symbol </th>
-    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-  </ng-container> -->
-
-  <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<br>
-<br>
- -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  -->

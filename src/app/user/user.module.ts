@@ -7,35 +7,36 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatCardModule} from '@angular/material/card';
 
 import { UserRoutingModule } from './user-routing.module';
 import { ListComponent } from './list/list.component';
 import { AddComponent } from './add/add.component';
 import { ListItemsComponent } from './list-items/list-items.component';
-import { AuthGuard } from '../auth.guard';
-import { UserGuard } from '../user.guard';
+import { AuthGuard } from '../guard/auth.guard';
+import { UserGuard } from '../guard/user.guard';
 import { HeaderComponent } from '../components/header/header.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialUserModule } from '../material/material-user/material-user.module';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
-    // HeaderComponent,
     ListComponent,
     AddComponent,
     ListItemsComponent
+    // HeaderComponent
   ],
   imports: [
 CommonModule,
     UserRoutingModule,
-    MatTableModule,
-    MatIconModule,
-    MatListModule,
     FormsModule,
-    MatSelectModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule
+    ReactiveFormsModule,
+    MaterialUserModule,
+    FlexLayoutModule
+
   ],
   providers: [AuthGuard,UserGuard,HeaderComponent],
 })

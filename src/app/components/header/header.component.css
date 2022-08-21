@@ -1,10 +1,21 @@
-/* .example-spacer {
+.example-spacer {
   flex: 1 1 auto;
-} */
+}
+mat-toolbar .img-logo{
+  height: 50px;
+}
 
-
-
-.header{
+.img-profile {
+  border: 1px solid gray;
+  border-radius: 50%;
+  /* background-size: 10px; */
+  height: 45px;
+  width: 45px;
+}
+mat-toolbar .mat-menu{
+  margin-top: 10px;
+}
+/* .header {
   background-color: white;
   margin: 0;
   padding: 0;
@@ -20,14 +31,14 @@
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
   z-index: 100;
 }
-.left-header img{
+.left-header img {
   height: 35px;
   width: 35px;
   margin-left: 10px;
   padding-top: 5px;
 }
-.right-header img{
+.right-header img {
   height: 40px;
   width: 40px;
   margin-right: 10px;
-}
+} */

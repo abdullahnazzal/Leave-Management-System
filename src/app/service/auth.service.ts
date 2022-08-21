@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
-import { User } from "../User";
-import { HttpClient } from '@angular/common/http';
-import {Observable } from 'rxjs';
+import { User } from "../user/User";
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
-  // user!:User[];
   user:User[]=JSON.parse(localStorage.getItem("user") || "false");
   message!:string;
 
   private isLoginStatus:boolean=JSON.parse(localStorage.getItem("loggedIn") || "false");
 
-  constructor(private http:HttpClient) { }
+  constructor() { }
 
   setUser(user:User[]):void{
     this.user=user;
     localStorage.setItem("user",JSON.stringify(this.user))
   }
+
   setLoginSatatus(value:boolean):void{
     this.isLoginStatus=value;
     localStorage.setItem("loggedIn",`${value}`)

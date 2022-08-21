@@ -1,0 +1,28 @@
+<form (ngSubmit)="handleReasonOfReject()">
+  <h1 mat-dialog-title>Reason Of Reject</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Reason?</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="reason"
+        name="reason"
+        id="reason"
+        required
+      ></textarea>
+      <mat-hint>Tell Employee Why!</mat-hint>
+      <!-- <input matInput [(ngModel)]="name"> -->
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button
+      type="submit"
+      mat-button
+      mat-dialog-close
+      mat-dialog-close="true"
+    >
+      Confirm
+    </button>
+    <!-- <button mat-button mat-dialog-close mat-dialog-close="false">No</button> -->
+  </div>
+</form>
